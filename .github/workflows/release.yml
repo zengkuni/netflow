@@ -67,11 +67,23 @@ jobs:
           chmod +x gradlew
           ./gradlew :app:assembleRelease --no-daemon --console=plain
 
+      - name: Resolve APK path
+        # Signed builds emit app-release.apk, unsigned ones
+        # app-release-unsigned.apk; glob handles both.
+        run: |
+          APK=$(ls app/build/outputs/apk/release/app-release*.apk | head -1)
+          if [ -z "$APK" ] || [ ! -f "$APK" ]; then
+            echo "::error::no release APK under app/build/outputs/apk/release/"
+            exit 1
+          fi
+          echo "APK_PATH=$APK" >> "$GITHUB_ENV"
+          echo "apk=$APK"
+
       - name: Check tag matches versionName
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
           AAPT=$(ls "$ANDROID_HOME"/build-tools/*/aapt | sort -V | tail -1)
-          APK_VERSION=$("$AAPT" dump badging app/build/outputs/apk/release/app-release.apk \
+          APK_VERSION=$("$AAPT" dump badging "$APK_PATH" \
             | grep -oP "versionName='\K[^']+")
           echo "tag=$TAG_VERSION apk=$APK_VERSION"
           if [ "$APK_VERSION" != "$TAG_VERSION" ]; then
@@ -81,7 +93,7 @@ jobs:
 
       - name: Rename APK for release
         run: |
-          cp app/build/outputs/apk/release/app-release.apk "app/build/outputs/apk/release/Netflow-${GITHUB_REF_NAME}.apk"
+          cp "$APK_PATH" "app/build/outputs/apk/release/Netflow-${GITHUB_REF_NAME}.apk"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

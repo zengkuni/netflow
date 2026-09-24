@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Normal (install-time, no prompt) permission added in API 33+. Lets us
+         read TelephonyManager.getDataNetworkType() to show live 2G/3G/4G/5G
+         in the header. -->
+    <uses-permission android:name="android.permission.READ_BASIC_PHONE_STATE" />
+    <!-- Pre-33 fallback: on API ≤ 32 we need the runtime READ_PHONE_STATE.
+         The maxSdkVersion attribute makes the system ignore this declaration
+         entirely on API 33+ devices, so modern users never see a prompt. -->
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- specialUse (not dataSync): a dataSync FGS can't be launched from a
+         BOOT_COMPLETED receiver on Android 15+, which auto-start-on-boot needs.
+         specialUse is exempt from that restriction. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Package visibility (Android 11+) so OemHelper can resolveActivity() the
+         per-manufacturer auto-start / battery / background-activity screens. -->
+    <queries>
+        <package android:name="com.miui.securitycenter" />
+        <package android:name="com.miui.powerkeeper" />
+        <package android:name="com.letv.android.letvsafe" />
+        <package android:name="com.huawei.systemmanager" />
+        <package android:name="com.coloros.safecenter" />
+        <package android:name="com.coloros.oppoguardelf" />
+        <package android:name="com.oppo.safe" />
+        <package android:name="com.iqoo.secure" />
+        <package android:name="com.vivo.permissionmanager" />
+        <package android:name="com.oneplus.security" />
+        <package android:name="com.asus.mobilemanager" />
+        <package android:name="com.samsung.android.lool" />
+        <package android:name="com.samsung.android.sm_cn" />
+    </queries>
+
+    <application
+        android:name=".NetflowApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Netflow"
+        tools:targetApi="35">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Netflow">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".service.ProxyService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="User-controlled SOCKS5 proxy that pins traffic to the cellular network; the service must stay alive to hold the cellular Network handle and keep the listener accepting client connections." />
+        </service>
+
+        <service
+            android:name=".service.JsonRpcService"
+            android:exported="false" />
+
+        <receiver
+            android:name=".service.BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

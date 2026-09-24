@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!--
+        Netflow brand mark. Warm dark moss (the app's default-dark canvas) with
+        the foliage-green bolt that the light theme uses as its action accent.
+        Replaces the old black / #1B6E51 mint livery from the pre-Memory-Garden
+        palette.
+    -->
+    <path
+        android:fillColor="#243427"
+        android:pathData="M0,0h108v108h-108z" />
+</vector>

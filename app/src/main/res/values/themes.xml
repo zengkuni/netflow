@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Netflow" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/netflow_ink</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!--
+            True, because the platform window background is now warm paper and
+            the Compose theme defaults to the light palette. The Compose
+            SideEffect in Theme.kt re-applies this per theme mode at runtime,
+            so the static value only has to match the launch frame.
+        -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="29">false</item>
+    </style>
+</resources>

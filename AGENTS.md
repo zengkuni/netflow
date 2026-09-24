@@ -333,9 +333,12 @@ These are load-bearing, break them and the app stops working.
   fields with getters. Corner radii are never inline literals: `CardRadius`
   (26.dp), `TileRadius` (22.dp) and `PillShape` live in `Shape.kt`.
 - **Theme toggle is a 36-dp round icon button** in the home header (top
-  right, soft surface + hairline border). Cycles `Light to Dark to System to
-  Light`; a fresh install with no pref starts at Light, so the first tap lands
-  on Dark. Persisted as `theme_mode` in `netflow_prefs`.
+  right, soft surface + hairline border). Cycles `Dark to System to Light to
+  Dark`; a fresh install with no pref starts at Dark, so the first tap lands
+  on System. Persisted as `theme_mode` in `netflow_prefs`. The platform
+  launch frame is moss black (`values/themes.xml` windowBackground plus
+  both `windowLight*Bar` false) to match that default; Theme.kt's SideEffect
+  re-applies the bar appearance per theme mode at runtime.
 - **Header tech line is dynamic and tappable.** When `CellularTechMonitor`
   reports `DataOff`, the dot and label switch to danger and read "data off";
   otherwise they show carrier + radio tech. Tapping the line re-opens the

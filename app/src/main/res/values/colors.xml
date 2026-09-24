@@ -3,12 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <!--
-        Warm paper, the Memory Garden canvas. Used as the platform
-        windowBackground, so the very first frame before Compose draws is paper
-        rather than OLED black, which flashed before the light-first default
-        took over.
+        Moss black, the Night Garden canvas. Used as the platform
+        windowBackground so the first frame before Compose draws is the
+        dark default, not the opt-in light palette.
     -->
-    <color name="netflow_ink">#FFF9F9F6</color>
+    <color name="netflow_ink">#FF243427</color>
     <!--
         Forest green, the Memory Garden action colour. Kept as a resource even
         though the Compose layer owns its own token, because the notification

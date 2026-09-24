@@ -7,7 +7,7 @@
 SOCKS5 proxy untuk Android yang memaksa seluruh lalu lintas keluar lewat
 jaringan seluler.
 
-[![Release](https://img.shields.io/github/v/release/bolone-sengkuni/netflow?style=flat-square&color=4E7A57&label=rilis)](https://github.com/bolone-sengkuni/netflow/releases/latest)
+[![Release](https://img.shields.io/github/v/release/zengkuni-dev/netflow?style=flat-square&color=4E7A57&label=rilis)](https://github.com/zengkuni-dev/netflow/releases/latest)
 [![Lisensi](https://img.shields.io/badge/lisensi-MIT-4E7A57?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/Android-8.0%2B-4E7A57?style=flat-square&logo=android&logoColor=black)](https://developer.android.com)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.0-4E7A57?style=flat-square&logo=kotlin&logoColor=black)](https://kotlinlang.org)
@@ -57,7 +57,7 @@ tema di header, dan pilihannya tersimpan.
 Rilis terbaru: **v1.3**
 
 Ambil `Netflow-v1.3.apk` dari
-[Releases](https://github.com/bolone-sengkuni/netflow/releases/latest).
+[Releases](https://github.com/zengkuni-dev/netflow/releases/latest).
 Membutuhkan Android 8.0 atau yang lebih baru.
 
 ## Cara pakai

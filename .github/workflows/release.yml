@@ -16,6 +16,8 @@ permissions:
 jobs:
   build-release:
     runs-on: ubuntu-latest
+    env:
+      ANDROID_HOME: ${{ github.workspace }}/.android-sdk
     steps:
       - uses: actions/checkout@v4
 
@@ -25,21 +27,22 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      # compileSdk 36 / build-tools 36.x are not in the runner image yet.
-      - name: Install platform and build-tools 36
+      - name: Install Android SDK
         run: |
+          mkdir -p "$ANDROID_HOME/cmdline-tools"
+          curl -sSLo /tmp/cmdline-tools.zip \
+            https://dl.google.com/android/repository/commandlinetools-linux-16111833_latest.zip
+          unzip -q /tmp/cmdline-tools.zip -d /tmp/cmdline-tools
+          mv /tmp/cmdline-tools/cmdline-tools "$ANDROID_HOME/cmdline-tools/latest"
+          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
           yes | sdkmanager --licenses > /dev/null
+          # compileSdk 36 / build-tools 36.x: the app needs both.
           sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+          echo "$ANDROID_HOME/build-tools/36.0.0" >> "$GITHUB_PATH"
 
       - name: Decode keystore (only when secrets are set)
         env:
           KEYSTORE_BASE64: ${{ secrets.NETFLOW_KEYSTORE_BASE64 }}
-          KEYSTORE_PASSWORD: ${{ secrets.NETFLOW_KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.NETFLOW_KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.NETFLOW_KEY_PASSWORD }}
         if: env.KEYSTORE_BASE64 != ''
         run: |
           mkdir -p app/keystore
@@ -55,7 +58,6 @@ jobs:
         run: ./gradlew :app:assembleRelease --no-daemon --console=plain
 
       - name: Check tag matches versionName
-        id: meta
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
           AAPT=$(ls "$ANDROID_HOME"/build-tools/*/aapt | sort -V | tail -1)
@@ -65,7 +67,7 @@ jobs:
           if [ "$APK_VERSION" != "$TAG_VERSION" ]; then
             echo "::error::tag ${GITHUB_REF_NAME} does not match versionName ${APK_VERSION}; bump app/build.gradle.kts first"
             exit 1
-          }
+          fi
 
       - name: Rename APK for release
         run: |

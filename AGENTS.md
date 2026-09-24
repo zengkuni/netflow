@@ -75,7 +75,7 @@ If multiple ADB devices show up (e.g. an emulator + the phone), pass
 5. Commit, push, then:
    ```bash
    gh release create vX.Y.Z /tmp/Netflow-vX.Y.Z.apk \
-     --repo zengkuni-dev/netflow \
+     --repo zengkuni/netflow \
      --title "Netflow vX.Y.Z" \
      --notes "..."
    ```
@@ -632,7 +632,7 @@ Root support is additive and off by default (`root_enabled` in
 
 ## Repo
 
-GitHub: <https://github.com/zengkuni-dev/netflow> (default branch `main`,
+GitHub: <https://github.com/zengkuni/netflow> (default branch `main`,
 public, MIT). Latest release lives at the `/releases/latest` URL.
 
 ## Where scratch files go

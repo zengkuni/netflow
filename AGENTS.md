@@ -80,9 +80,15 @@ If multiple ADB devices show up (e.g. an emulator + the phone), pass
      --notes "..."
    ```
 
-**Never push without explicit instruction.** Default is to build + install
-locally, hand the APK to the user, and let them test before any commit.
-Commit messages must not include `Co-Authored-By` or any AI attribution.
+**Every fix, feature, or doc change must be committed and pushed in the same
+session.** No waiting for a separate go-ahead, no parking work locally: once
+the change is verified (build, device test, or whatever the surface allows),
+`git commit` it and `git push origin main` before yielding. `main` is
+fast-forward only; if the push is rejected, fetch and reconcile, never
+force-push. Commit messages must not include `Co-Authored-By` or any AI
+attribution. Build + install locally and hand the APK to the user for device
+testing *before* the push whenever the change is user-visible, but the commit
+and push still happen in that same session.
 
 **Never bump the version on your own initiative**, not even when adding a
 feature, despite step 1–2 above. The user decides when a release is cut and

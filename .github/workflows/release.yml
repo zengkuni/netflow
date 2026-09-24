@@ -17,7 +17,11 @@ jobs:
   build-release:
     runs-on: ubuntu-latest
     env:
+      # The ubuntu-latest image presets ANDROID_SDK_ROOT to its own preinstalled
+      # SDK; pointing both vars at the same bootstrapped tree keeps Gradle's
+      # "different paths to the SDK" check happy and the build hermetic.
       ANDROID_HOME: ${{ github.workspace }}/.android-sdk
+      ANDROID_SDK_ROOT: ${{ github.workspace }}/.android-sdk
     steps:
       - uses: actions/checkout@v4
 

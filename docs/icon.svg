@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 108 108" width="512" height="512" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#243427"/>
       <stop offset="1" stop-color="#18211B"/>
     </linearGradient>
-    <linearGradient id="bolt" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#A8D5B5"/>
-      <stop offset="1" stop-color="#6B9B74"/>
-    </linearGradient>
   </defs>
 
   <!-- Rounded-square base, warm dark moss: the app's default-dark canvas. -->
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect width="108" height="108" rx="23.6" fill="url(#bg)"/>
 
   <!-- Outer ring suggesting "network / signal", foliage green. -->
-  <circle cx="256" cy="256" r="172" fill="none" stroke="#4E7A57" stroke-width="6" opacity="0.75"/>
-  <circle cx="256" cy="256" r="148" fill="none" stroke="#4E7A57" stroke-width="3" opacity="0.45"/>
+  <circle cx="54" cy="54" r="36" fill="none" stroke="#4E7A57" stroke-width="1.2" opacity="0.75"/>
+  <circle cx="54" cy="54" r="31" fill="none" stroke="#4E7A57" stroke-width="0.6" opacity="0.45"/>
 
-  <!-- Lightning bolt, the Netflow brand mark. -->
-  <path d="M286,124 L188,290 L246,290 L226,388 L324,222 L266,222 Z"
-        fill="url(#bolt)"
-        stroke="#18211B"
-        stroke-width="2"
-        stroke-linejoin="round"/>
+  <!-- SIM card, the Netflow brand mark. Chamfered top-left corner, the
+       physical-SIM convention; chip contact inside. -->
+  <path d="M48,34 L67,34 A5,5 0 0,1 72,39 L72,69 A5,5 0 0,1 67,74 L41,74 A5,5 0 0,1 36,69 L36,44 A2,2 0 0,1 38,42 L44,36 A2,2 0 0,1 46,34 L48,34 Z"
+        fill="none" stroke="#18211B" stroke-width="3.6"/>
+  <path d="M48,34 L67,34 A5,5 0 0,1 72,39 L72,69 A5,5 0 0,1 67,74 L41,74 A5,5 0 0,1 36,69 L36,44 A2,2 0 0,1 38,42 L44,36 A2,2 0 0,1 46,34 L48,34 Z"
+        fill="none" stroke="#A8D5B5" stroke-width="2.2"/>
+  <path d="M41.8,46.8 L66.2,46.8 A3.2,3.2 0 0,1 69.4,50 L69.4,64 A3.2,3.2 0 0,1 66.2,67.2 L41.8,67.2 A3.2,3.2 0 0,1 38.6,64 L38.6,50 A3.2,3.2 0 0,1 41.8,46.8 Z"
+        fill="#18211B"/>
+  <path d="M44,50 L64,50 A2,2 0 0,1 66,52 L66,62 A2,2 0 0,1 64,64 L44,64 A2,2 0 0,1 42,62 L42,52 A2,2 0 0,1 44,50 Z"
+        fill="#A8D5B5"/>
 </svg>

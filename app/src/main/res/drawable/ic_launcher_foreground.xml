@@ -10,19 +10,32 @@
         android:strokeWidth="1.2"
         android:fillColor="#00000000"
         android:pathData="M54,54 m-36,0 a36,36 0 1,0 72,0 a36,36 0 1,0 -72,0" />
-    <!-- Inner ring, dimmer so the bolt reads against it. -->
+    <!-- Inner ring, dimmer so the card reads against it. -->
     <path
         android:strokeColor="#4E7A57"
         android:strokeAlpha="0.45"
         android:strokeWidth="0.6"
         android:fillColor="#00000000"
         android:pathData="M54,54 m-31,0 a31,31 0 1,0 62,0 a31,31 0 1,0 -72,0" />
-    <!-- Bolt, the lightest foliage green so it carries on both the dark moss
-         and the monochrome layer. -->
+    <!-- SIM card, the lightest foliage green so it carries on both the dark
+         moss and the monochrome layer. Chamfered top-left corner, the
+         physical-SIM convention. A dark halo path sits under the outline so
+         the stroke stays legible over the rings. -->
+    <path
+        android:strokeColor="#243427"
+        android:strokeWidth="3.6"
+        android:fillColor="#00000000"
+        android:pathData="M48,34 L67,34 A5,5 0 0,1 72,39 L72,69 A5,5 0 0,1 67,74 L41,74 A5,5 0 0,1 36,69 L36,44 A2,2 0 0,1 38,42 L44,36 A2,2 0 0,1 46,34 L48,34 Z" />
+    <path
+        android:strokeColor="#A8D5B5"
+        android:strokeWidth="2.2"
+        android:fillColor="#00000000"
+        android:pathData="M48,34 L67,34 A5,5 0 0,1 72,39 L72,69 A5,5 0 0,1 67,74 L41,74 A5,5 0 0,1 36,69 L36,44 A2,2 0 0,1 38,42 L44,36 A2,2 0 0,1 46,34 L48,34 Z" />
+    <!-- Chip contact: dark under-pad, then the light pad. -->
+    <path
+        android:fillColor="#243427"
+        android:pathData="M41.8,46.8 L66.2,46.8 A3.2,3.2 0 0,1 69.4,50 L69.4,64 A3.2,3.2 0 0,1 66.2,67.2 L41.8,67.2 A3.2,3.2 0 0,1 38.6,64 L38.6,50 A3.2,3.2 0 0,1 41.8,46.8 Z" />
     <path
         android:fillColor="#A8D5B5"
-        android:pathData="M60,26 L40,60 L52,60 L48,82 L68,46 L56,46 Z"
-        android:strokeColor="#243427"
-        android:strokeWidth="0.4"
-        android:strokeLineJoin="round" />
+        android:pathData="M44,50 L64,50 A2,2 0 0,1 66,52 L66,62 A2,2 0 0,1 64,64 L44,64 A2,2 0 0,1 42,62 L42,52 A2,2 0 0,1 44,50 Z" />
 </vector>

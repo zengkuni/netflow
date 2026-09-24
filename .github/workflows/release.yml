@@ -61,7 +61,11 @@ jobs:
           NETFLOW_KEYSTORE_PASSWORD: ${{ secrets.NETFLOW_KEYSTORE_PASSWORD }}
           NETFLOW_KEY_ALIAS: ${{ secrets.NETFLOW_KEY_ALIAS }}
           NETFLOW_KEY_PASSWORD: ${{ secrets.NETFLOW_KEY_PASSWORD }}
-        run: ./gradlew :app:assembleRelease --no-daemon --console=plain
+        # chmod guards filesystems that drop the exec bit on checkout
+        # (Windows worktrees, act's docker cp); harmless where it is set.
+        run: |
+          chmod +x gradlew
+          ./gradlew :app:assembleRelease --no-daemon --console=plain
 
       - name: Check tag matches versionName
         run: |

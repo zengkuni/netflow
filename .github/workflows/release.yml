@@ -27,7 +27,7 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Install Android SDK
+      - name: Install Android cmdline-tools
         run: |
           mkdir -p "$ANDROID_HOME/cmdline-tools"
           curl -sSLo /tmp/cmdline-tools.zip \
@@ -35,6 +35,12 @@ jobs:
           unzip -q /tmp/cmdline-tools.zip -d /tmp/cmdline-tools
           mv /tmp/cmdline-tools/cmdline-tools "$ANDROID_HOME/cmdline-tools/latest"
           echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
+
+      # Separate step on purpose: GITHUB_PATH only reaches the steps after
+      # the one that writes it, so sdkmanager is not on PATH inside the
+      # step that installs it.
+      - name: Accept licenses and install SDK packages
+        run: |
           yes | sdkmanager --licenses > /dev/null
           # compileSdk 36 / build-tools 36.x: the app needs both.
           sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
